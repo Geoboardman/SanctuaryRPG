@@ -78,8 +78,12 @@ namespace CellGo1
         protected override void OnResume()
         {
             base.OnResume();
+        }
 
-
+        private void OpenInventory()
+        {
+            Intent intent = new Intent(this, typeof(inventory_activity));
+            StartActivity(intent);
         }
 
         private void StartBattle()
@@ -117,8 +121,7 @@ namespace CellGo1
                         {
                             _this.myMarker.Position = new LatLng(location.Latitude, location.Longitude);
                         }
-                    }
-                    
+                    }                    
                 }
                 //Update region
                 _this.playerRegion = _this.CalculateRegion((decimal)location.Latitude, (decimal)location.Longitude);
@@ -172,6 +175,7 @@ namespace CellGo1
 
         private void FabOnClick(object sender, EventArgs eventArgs)
         {
+            OpenInventory();
             clickMovement = !clickMovement;
             /*
             Snackbar.Make(view, "Replace with your own action", Snackbar.LengthLong)
@@ -226,8 +230,9 @@ namespace CellGo1
             map.SetOnMarkerClickListener(this);
 
             playerRegion = CalculateRegion((decimal)location.Latitude, (decimal)location.Longitude);
+            Spawner spawner = new Spawner(map, location.Latitude, location.Longitude, 5, 5, 100);
             //mapObjectManager.CreateTestObject(playerRegion);
-            mapObjectManager.GetMapObjects(map, playerRegion, null);
+            //mapObjectManager.GetMapObjects(map, playerRegion, null);
         }
 
         public bool OnMarkerClick(Marker marker)

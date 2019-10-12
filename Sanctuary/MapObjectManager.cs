@@ -23,7 +23,6 @@ namespace CellGo1
         List<MapObjects> mapObjects;
         HttpClient httpClient;
         string url = "http://192.168.0.13:7500/api/MapObjects/";
-        GoogleMap gMap;
 
         public MapObjectManager()
         {
@@ -84,29 +83,28 @@ namespace CellGo1
             {
                 MarkerOptions markOpt = new MarkerOptions();
                 markOpt.SetPosition(new LatLng((double)mo.Lat,(double)mo.Lon));
-                switch(mo.AttributesDict["name"])
-                {
-                    case "wurm":
-                        markOpt.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.monster_07));
-                        break;
-                    case "bee":
-                        markOpt.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.monster_09));
-                        break;
-                    case "crab":
-                        markOpt.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.monster_13));
-                        break;
-                    case "rat":
-                        markOpt.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.monster_03));
-                        break;
-                    case "snake":
-                        markOpt.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.monster_15));
-                        break;
-                    default:
-                        markOpt.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.monster_07));
-                        break;
-                }
+                markOpt.SetIcon(GetIcon(mo.AttributesDict["name"]));
                 Marker tempM = map.AddMarker(markOpt);
                 mo.markerID = tempM.Id;
+            }
+        }
+
+        private BitmapDescriptor GetIcon(string name)
+        {
+            switch (name)
+            {
+                case "wurm":
+                    return BitmapDescriptorFactory.FromResource(Resource.Drawable.monster_07);
+                case "bee":
+                    return BitmapDescriptorFactory.FromResource(Resource.Drawable.monster_09);
+                case "crab":
+                    return BitmapDescriptorFactory.FromResource(Resource.Drawable.monster_13);
+                case "rat":
+                    return BitmapDescriptorFactory.FromResource(Resource.Drawable.monster_03);
+                case "snake":
+                    return BitmapDescriptorFactory.FromResource(Resource.Drawable.monster_15);
+                default:
+                    return BitmapDescriptorFactory.FromResource(Resource.Drawable.monster_07);
             }
         }
     }

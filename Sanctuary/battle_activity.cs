@@ -21,7 +21,7 @@ namespace CellGo1
             Live,
             Over
         }
-
+        
         battlestate gameState;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -35,8 +35,8 @@ namespace CellGo1
 
             RelativeLayout TopHalf = FindViewById<RelativeLayout>(Resource.Id.TopLayout);
             TextView txt = new TextView(this);
-            Android.Graphics.Typeface typeface = this.Resources.GetFont(Resource.Font.betterpixels);
-            txt.Typeface = typeface;
+            //Android.Graphics.Typeface typeface = this.Resources.GetFont(Resource.Font.betterpixels);
+            //txt.Typeface = typeface;
             txt.Text = "Hello world check out this awesome font";
             TopHalf.AddView(txt);
         }
